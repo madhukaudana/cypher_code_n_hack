@@ -34,7 +34,7 @@ p {
 }
 
 .pDark p {
-    color: #6D6D6D;
+    color: #fff;
 }
 
 .pDark h3 {
@@ -175,11 +175,12 @@ a {
     .carousel-caption h1 {
         font-size: 45px;
         padding: 10px 15px;
-        background: rgba(128, 180, 33, 0.80);
+        background: rgba(107,108,108, 0.80);
         color: #FFFFFF;
         text-shadow: none;
         font-weight: bold;
         display: inline-block;
+        text-align:left;
     }
     /*.carousel-caption h1 {
 			background: rgba(0,0,0,0.2);
@@ -195,10 +196,17 @@ a {
 			margin: 5% auto 5%;
 		}*/
     .carousel-caption h3 {
-        font-size: 30px;
-        color: #1C4604;
+        font-size: 32px;
+        color: #000000;
         font-weight: bold;
-        text-shadow: #fff 1px 1px 1px;
+        text-shadow: #fff 3px 3px 3px;
+    }
+
+    .carousel-caption h4 {
+        font-size: 20px;
+        color: #000000;
+        font-weight: bold;
+        text-shadow: #fff 3px 3px 3px;
     }
 
 .actionPanel {
