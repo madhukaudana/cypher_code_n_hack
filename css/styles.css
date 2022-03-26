@@ -689,7 +689,7 @@ body {
 
 .socialIcons li {
     list-style: none;
-    display: inline;
+    display: external;
     margin-right: 6px;
 }
 
