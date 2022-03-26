@@ -16,11 +16,11 @@ body {
     font-size: 14px;
     font-family: 'Roboto', 'sans-serif';
     -webkit-font-smoothing: antialiased;
-    background: #fff;
+    background: #171717;
 }
 
 ::selection {
-    color: #fff;
+    color: #171717;
     background: #80B421;
 }
 
@@ -122,7 +122,7 @@ a {
 .header {
     position: fixed;
     width: 100%;
-    background: #fff;
+    background: #171717;
     z-index: 50;
     border-radius: 0;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
@@ -156,9 +156,13 @@ a {
 #myCarousel {
     margin-top: 50px;
     border-bottom: 4px solid #80B421;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .carousel-inner > .item {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .carousel-caption {
@@ -241,7 +245,7 @@ a {
 
 .header .navbar {
     margin: 0;
-    background: #fff;
+    background: #171717;
     border: 0;
 }
 
