@@ -965,6 +965,22 @@ footer {
 .gamebtn{
     display: inline-block;
     position: absolute;
-    top: 125%;
-    right: 20%;
+    top: 155%;
+    left: 50%;
+    color: white;
 }
+
+#playBtn{
+    font-size:xxx-large;
+    border-radius: 10px;
+    transition-duration: 0.4s;
+}
+
+#playBtn:hover{
+    background-color: green;
+}
+
+
+
+
+
