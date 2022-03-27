@@ -369,7 +369,7 @@ a {
     .banner-content p {
         font-size: 1.9em;
         font-weight: normal;
-        color: #B9B9B9;
+        color: #fff;
     }
 
 .sub-heading {
@@ -382,7 +382,7 @@ a {
     }
 
     .sub-heading p {
-        color: #5A5A5A;
+        color: #fff;
     }
 
 .heading {
@@ -956,4 +956,8 @@ footer {
         display: inline-block;
         margin: 0 0 23px 5px;
     }
+}
+
+.col-md-4 contact{
+    position: right;
 }
