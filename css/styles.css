@@ -965,5 +965,6 @@ footer {
 .gamebtn{
     display: inline-block;
     position: absolute;
-    left: 60%;
+    top: 125%;
+    right: 20%;
 }
