@@ -961,3 +961,9 @@ footer {
 .col-md-4 contact{
     position: right;
 }
+
+.gamebtn{
+    display: inline-block;
+    position: absolute;
+    left: 60%;
+}

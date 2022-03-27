@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<style>
+canvas {
+    border:1px solid #d3d3d3;
+    background-color:gray;
+}
+</style>
+</head>
+<body onload="startGame()">
+<script>
+
+const goodObjList = [];
+const badObjList = [];
+var objectCatcher;
+var myGamePiece;
+var otherPiece1;
+var otherPiece2;
+var otherPiece3;
+var otherPiece4;
+var otherPiece5;
+var otherPiece6;
+var goodPiece1;
+var goodPiece2;
+var goodObjCount = 0;
+var badObjCount = 0;
+var floor;
+myScore = new component("30px", "Consolas", "black", 280, 40, "text");
+Co2Score = new component("30px", "Consolas", "black", 280, 70, "text");
+mainOuput = new component("80px", "Stencil", "black", 280, 170, "text");
+restartBtn = new component(30, 30, "green", 280, 200);
+
+
+function startGame() {
+    myGamePiece = new component(30, 30, "water.png", 600, 0, "image");
+    otherPiece1 = new component(30, 30, "plastic-bag.png", 300, -50, "image");
+    otherPiece2 = new component(30, 30, "bag.png", 100, -50, "image");
+    goodPiece1 = new component(30, 30, "metal.png", 50, -30, "image");
+    otherPiece3 = new component(30, 30, "milkshake.png", 500, 0, "image");
+    goodPiece2 = new component(30, 30, "nut.png", 220, -10, "image");
+    otherPiece4 = new component(30, 30, "straw.png", 430, -50, "image");
+    otherPiece5 = new component(30, 30, "wine-bottle.png", 350, -90, "image");
+    otherPiece6 = new component(30, 30, "wine-bottle (1).png", 390, 0, "image");
+    objectCatcher = new component(60, 60, "paper-bin.png", 660, 400, "image");
+    floorPiece = new component(805, 20, "green", 0, 621)
+    goodObjList.push(goodPiece1, goodPiece2);
+    badObjList.push(myGamePiece, otherPiece1, otherPiece2, otherPiece3, otherPiece4, otherPiece5, otherPiece6);
+    myGameArea.start();
+}
+
+var myGameArea = {
+    canvas : document.createElement("canvas"),
+    start : function() {
+        this.canvas.width = 805;
+        this.canvas.height = 641;
+        this.context = this.canvas.getContext("2d");
+        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        this.interval = setInterval(updateGameArea, 20); 
+        window.addEventListener('keydown', function (e){
+            myGameArea.key = e.keyCode;
+        })
+        window.addEventListener('keyup', function (e) {
+            myGameArea.key = false;
+        })       
+    },
+    clear : function() {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    },
+    stop : function() {
+        clearInterval(this.interval);
+    }     
+}
+
+function component(width, height, color, x, y, type) {
+    this.type = type;
+    if (type == "image") {
+    this.image = new Image();
+    this.image.src = color;
+  } 
+    this.width = width;
+    this.height = height;
+    this.x = x;
+    this.y = y;    
+    this.speedX = 0;
+    this.speedY = 0;    
+    this.gravity = 0.05;
+    this.gravitySpeed = 1;
+    this.update = function() {
+        ctx = myGameArea.context;
+        if (type == "image") {
+            ctx.drawImage(this.image,
+            this.x,
+            this.y,
+            this.width, this.height); 
+        } else if (this.type == "text") {
+            ctx.font = this.width + " " + this.height;
+            ctx.fillStyle = color;
+            ctx.fillText(this.text, this.x, this.y);
+        } else {
+            ctx.fillStyle = color;
+            ctx.fillRect(this.x, this.y, this.width, this.height);
+        }
+    }
+    this.newPos = function() {
+        this.gravitySpeed += this.gravity;
+        this.x += this.speedX;
+        this.y += this.speedY + this.gravitySpeed;        
+    }
+    this.objectPos = function() {
+        this.x += this.speedX;
+        this.y += this.speedY;        
+    }
+    this.fallInto = function(otherobj) {   
+        var myleft = this.x;
+        var myright = this.x + (this.width);
+        var mytop = this.y;
+        var mybottom = this.y + (this.height);
+        var otherleft = otherobj.x;
+        var otherright = otherobj.x + (otherobj.width);
+        var othertop = otherobj.y;
+        var otherbottom = otherobj.y + (otherobj.height);
+        var fall = true;   
+        if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright) || (mybottom < otherbottom)) {
+            fall = false;
+        }
+    return fall;
+  }
+  this.crashWith = function(otherobj) {   
+        var myleft = this.x;
+        var myright = this.x + (this.width);
+        var mytop = this.y;
+        var mybottom = this.y + (this.height);
+        var otherleft = otherobj.x;
+        var otherright = otherobj.x + (otherobj.width);
+        var othertop = otherobj.y;
+        var otherbottom = otherobj.y + (otherobj.height);
+        var crash = true;   
+        if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)){
+            crash = false;
+        }
+    return crash;
+  }
+}
+
+function crashWith(myObj, otherObj){
+    var myleft = this.x;
+        var myright = this.x + (this.width);
+        var mytop = this.y;
+        var mybottom = this.y + (this.height);
+        var otherleft = otherobj.x;
+        var otherright = otherobj.x + (otherobj.width);
+        var othertop = otherobj.y;
+        var otherbottom = otherobj.y + (otherobj.height);
+        var crash = true;   
+        if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)){
+            crash = false;
+        }
+    return crash;
+}
+
+function countScore(){
+    goodObjCount+=1; 
+}
+
+function badCountScore(){
+    badObjCount+=0.1; 
+}
+
+function updateGameArea() {
+    if (goodObjList.fallInto(objectCatcher)){   
+        countScore();    
+        myGameArea.stop();
+        myGameArea.clear();
+        startGame();
+    } else if (badObjList.fallInto(objectCatcher)){
+        if(badObjCount<=0.3){
+            badCountScore();
+            myGameArea.stop();
+            myGameArea.clear();
+            startGame();
+        }else{
+            myGameArea.stop();
+            mainOuput.text="GAME OVER"
+            mainOuput.update();
+        }
+    }
+  else {
+        myGameArea.clear();
+        objectCatcher.speedX = 0;
+        objectCatcher.speedY = 0; 
+        if (myGameArea.key && myGameArea.key == 37) {objectCatcher.speedX = -10;}
+        if (myGameArea.key && myGameArea.key == 39) {objectCatcher.speedX = 10;}
+        for(let i=0; i<goodObjList.length; i++){
+            goodObjList[i].newPos();
+            goodObjList[i].update();    
+        }
+        for(let j=0; j<badObjList.length; j++){
+            badObjList[j].newPos();
+            badObjList[j].update();    
+        }
+        objectCatcher.objectPos();
+        objectCatcher.update();
+        myScore.text="SCORE: "+goodObjCount;
+        Co2Score.text="CO2 level: "+badObjCount;
+        myScore.update();
+        Co2Score.update();
+        // restartBtn.clicked();
+        // restartBtn.update();
+  }
+}
+</script>
+
+</body>
+</html>
